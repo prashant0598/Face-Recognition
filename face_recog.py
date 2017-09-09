@@ -9,28 +9,26 @@ face_cas = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
 font = cv2.FONT_HERSHEY_SIMPLEX
 
 # load the data from the numpy matrices and convert to linear vectors
-f_01 = np.load('face_01.npy').reshape((20, 50*50*3))	# Shubham
-f_02 = np.load('face_02.npy').reshape((20, 50*50*3))	# Prateek
-f_03 = np.load('face_03.npy').reshape((20, 50*50*3))	# Laksh
+f_01 = np.load('face_01.npy').reshape((20, 50*50*3))	# Prashant
+f_02=  np.load('face_02.npy').reshape((20, 50*50*3))    # Nil
 
-print f_01.shape, f_02.shape, f_03.shape
+print f_01.shape, f_02.shape
 
 # create a look-up dictionary
 names = {
-	0: 'Shubham',
-	1: 'Prateek', 
-	2: 'Laksh',
+	0: 'Prashant',
+	1: 'Nil', 
+	
 }
 
 # create a matrix to store the labels
-labels = np.zeros((60, 1))
-labels[:20, :] = 0.0	# first 20 for shubham (0)
-labels[20:40, :] = 1.0	# next 20 for prateek (1)
-labels[40:, :] = 2.0	# last 20 for laksh (2)
+labels = np.zeros((40, 1))
+labels[:20, :] = 0.0	# first 20 for Prashant (0)
+labels[40, :] = 1.0	# next 20 for Nil (1)
 
 # combine all info into one data array
-data = np.concatenate([f_01, f_02, f_03])	# (60, 7500)
-print data.shape, labels.shape	# (60, 1)
+data = np.concatenate([f_01, f_02])	# (40, 7500)
+print data.shape, labels.shape	# (40, 1)
 
 # the distance and knn functions we defined earlier
 def distance(x1, x2):
