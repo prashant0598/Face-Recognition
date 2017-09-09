@@ -66,7 +66,7 @@ data = np.asarray(data)
 print data.shape
 
 # save the data as a numpy matrix in an encoded format
-np.save('face_03', data)
+np.save('face_01', data)
 
 # We'll run the script for different people and store
 # the data into multiple files
