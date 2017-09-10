@@ -13,4 +13,5 @@ Face Recognition using KNN algorithm and open cv for python.This is a implementa
 * Open the face_recognition.py file and edit your name in the dictionary value corresponding to the number in which your face was stored i.e. for face_01,add your name to '0' value in the names dictionary.
 * Run the face_recognition.py file!
 ## Accuracy :tada:
-   98.4 (using knn) because of small dataset. Taking distance from webcam and quality of light into consideration it would give 90+          accuracy.
+   * 98.4 (using knn) because of small dataset. 
+   * Taking distance from webcam and quality of light into consideration it would give 90+ accuracy.
