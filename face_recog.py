@@ -9,26 +9,26 @@ face_cas = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
 font = cv2.FONT_HERSHEY_SIMPLEX
 
 # load the data from the numpy matrices and convert to linear vectors
-f_01 = np.load('face_01.npy').reshape((20, 50*50*3))	# Prashant
+f_01 = np.load('face_01.npy').reshape((20, 50*50*3))    # Prashant
 f_02=  np.load('face_02.npy').reshape((20, 50*50*3))    # Nil
 
 print f_01.shape, f_02.shape
 
 # create a look-up dictionary
 names = {
-	0: 'Prashant',
-	1: 'Nil', 
-	
+    0: 'Prashant',
+    1: 'Nil',
+
 }
 
 # create a matrix to store the labels
 labels = np.zeros((40, 1))
-labels[:20, :] = 0.0	# first 20 for Prashant (0)
-labels[40, :] = 1.0	# next 20 for Nil (1)
+labels[:20, :] = 0.0    # first 20 for Prashant (0)
+labels[40, :] = 1.0 # next 20 for Nil (1)
 
 # combine all info into one data array
-data = np.concatenate([f_01, f_02])	# (40, 7500)
-print data.shape, labels.shape	# (40, 1)
+data = np.concatenate([f_01, f_02]) # (40, 7500)
+print data.shape, labels.shape  # (40, 1)
 
 # the distance and knn functions we defined earlier
 def distance(x1, x2):
@@ -47,37 +47,37 @@ def knn(x, train, targets, k=5):
     return counts[0][np.argmax(counts[1])]
 
 while True:
-	# get each frame
-	ret, frame = cam.read()
+    # get each frame
+    ret, frame = cam.read()
 
-	if ret == True:
-		# convert to grayscale and get faces
-		gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-		faces = face_cas.detectMultiScale(gray, 1.3, 5)
+    if ret == True:
+        # convert to grayscale and get faces
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        faces = face_cas.detectMultiScale(gray, 1.3, 5)
 
-		# for each face
-		for (x, y, w, h) in faces:
-			face_component = frame[y:y+h, x:x+w, :]
-			fc = cv2.resize(face_component, (50, 50))
+        # for each face
+        for (x, y, w, h) in faces:
+            face_component = frame[y:y+h, x:x+w, :]
+            fc = cv2.resize(face_component, (50, 50))
 
-			# after processing the image and rescaling
-			# convert to linear vector using .flatten()
-			# and pass to knn function along with all the data
+            # after processing the image and rescaling
+            # convert to linear vector using .flatten()
+            # and pass to knn function along with all the data
 
-			lab = knn(fc.flatten(), data, labels)
-			# convert this label to int and get the corresponding name
-			text = names[int(lab)]
+            lab = knn(fc.flatten(), data, labels)
+            # convert this label to int and get the corresponding name
+            text = names[int(lab)]
 
-			# display the name
-			cv2.putText(frame, text, (x, y), font, 1, (255, 255, 0), 2)
+            # display the name
+            cv2.putText(frame, text, (x, y), font, 1, (255, 255, 0), 2)
 
-			# draw a rectangle over the face
-			cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
-		cv2.imshow('face recognition', frame)
+            # draw a rectangle over the face
+            cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
+        cv2.imshow('face recognition', frame)
 
-		if cv2.waitKey(1) == 27:
-			break
-	else:
-		print 'Error'
+        if cv2.waitKey(1) == 27:
+            break
+    else:
+        print 'Error'
 
 cv2.destroyAllWindows()
