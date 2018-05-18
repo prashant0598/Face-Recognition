@@ -15,3 +15,5 @@ Face Recognition using KNN algorithm and open cv for python.This is a implementa
 ## Accuracy :tada:
    * 98.4 (using knn) because of small dataset. 
    * Taking distance from webcam and quality of light into consideration it would give 90+ accuracy.
+## License
+    MIT: http://prashant0598.mit-license.org
