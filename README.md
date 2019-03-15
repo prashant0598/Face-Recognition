@@ -1,3 +1,7 @@
+[![HitCount](http://hits.dwyl.io/{prashant0598}/{https://github.com/prashant0598/Face-Recognition}.svg)](http://hits.dwyl.io/{prashant0598}/{https://github.com/prashant0598/Face-Recognition})
+[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+
+
 # Face-Recognition :boy: :movie_camera: 
 Face Recognition using KNN algorithm and open cv for python.This is a implementation of knn classifier.
 ## Breakdown of the code for knn classifier
